@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Assignments | Swayam Patil</title>
+    <style>
+        :root {
+            --primary: #00e6ff;
+            --bg-dark: #0a0e27;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #e0e0e0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e27, #1a1f3a);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--card-bg);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--primary);
+            letter-spacing: 2px;
+            font-size: 24px;
+        }
+
+        .user-info {
+            margin-top: 10px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        nav {
+            width: 280px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        nav h3 {
+            color: var(--primary);
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .btn-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            background: var(--card-bg);
+            color: white;
+            border: 1px solid rgba(0, 230, 255, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background: rgba(0, 230, 255, 0.2);
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        button.active {
+            background: var(--primary);
+            color: #0a0e27;
+            font-weight: bold;
+        }
+
+        /* Output Area */
+        main {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background: #fff; /* White background for assignment outputs */
+        }
+
+        #output-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .placeholder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #333;
+            font-style: italic;
+        }
+
+        footer {
+            background: var(--bg-dark);
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>COURSE: WEB DEVELOPMENT</h1>
+    <div class="user-info">
+        <span><strong>Name:</strong> Swayam Patil</span>
+        <span><strong>Roll No:</strong> 125</span>
+        <span><strong>Sem:</strong> 4</span>
+        <span><strong>College:</strong> D Y Patil College of Engineering and Technology, Kolhapur</span>
+    </div>
+</header>
+
+<div class="container">
+    <nav>
+        <h3>Assignments</h3>
+        <div class="btn-list">
+            <button onclick="loadAssignment(1, this)">Assignment 1: Basics</button>
+            <button onclick="loadAssignment(2, this)">Assignment 2: Static Page</button>
+            <button onclick="loadAssignment(3, this)">Assignment 3: Formatting</button>
+            <button onclick="loadAssignment(4, this)">Assignment 4: Nested Lists</button>
+            <button onclick="loadAssignment(5, this)">Assignment 5: Image Tags</button>
+            <button onclick="loadAssignment(6, this)">Assignment 6: Iframes</button>
+            <button onclick="loadAssignment(7, this)">Assignment 7: Links & Images</button>
+            <button onclick="loadAssignment(8, this)">Assignment 8: Student Table</button>
+            <button onclick="loadAssignment(9, this)">Assignment 9: Detailed Table</button>
+            <button onclick="loadAssignment(10, this)">Assignment 10: Digital Resume</button>
+            <button onclick="loadAssignment(11, this)">Assignment 11: Resume Style</button>
+            <button onclick="loadAssignment(12, this)">Assignment 12: CD Collection</button>
+            <button onclick="loadAssignment(13, this)">Assignment 13: XML/Table Practice</button>
+        </div>
+    </nav>
+
+    <main id="display-area">
+        <div class="placeholder" id="placeholder-text">Click a button on the left to view the assignment output.</div>
+        <iframe id="output-frame" style="display: none;"></iframe>
+    </main>
+</div>
+
+<footer>
+    &copy; 2026 Swayam Patil | Web Development Assignment Series
+</footer>
+
+<script>
+    // Storing assignment codes in an object
+    const assignmentCodes = {
+        1: `<!DOCTYPE html><html><head><title>Web Development</title></head><body><h1>This is my first file </h1><h2>using HTML</h2><h2>I'm looking forward to learn HTML5 in DYP college </h2><h3>Thank you.</h3></body></html>`,
+        2: `<!DOCTYPE html><html><head><title>Static Web Page</title></head><body><h1>Welcome to My Static Web Page</h1><hr><h3>Name : Swayam Patil</h3><h3>Division : A</h3><h3>Class : S. Y. B. Tech CSE</h3><h3>Batch : S5</h3><h3>Roll No. : 125</h3><hr><p>This is a simple static web page created using basic HTML tags. HTML stands for HyperText Markup Language and is used to create web pages.</p><h2>About Me</h2><p>My name is Suyash. I am a Computer Science Engineering student. I am learning Web Development as part of my academic curriculum.</p><h2>My Subjects</h2><ul><li>Web Technology</li><li>Programming in C</li><li>Java Programming</li><li>Data Structures</li></ul><h2>Daily Schedule</h2><ol><li>Attend College</li><li>Study Programming</li><li>Practice Coding</li><li>Revise Notes</li></ol><h2>Contact Information</h2><p>Email: example@gmail.com <br>Phone: 9876543210</p><hr><p>© 2026 My Static Web Page. All rights reserved.</p></body></html>`,
+        3: `<!DOCTYPE html><html><head><title>HTML Text Formatting Tags</title></head><body><h1>HTML Text Formatting Tags</h1><hr><h3>Name : Swayam Patil</h3><h3>Division : A</h3><h3>Class : S. Y. B. Tech CSE</h3><h3>Batch : S5</h3><h3>Roll No. : 125</h3><hr><p><b>Bold Text using &lt;b&gt; tag</b></p><p><strong>Strong Text using &lt;strong&gt; tag</strong></p><p><i>Italic Text using &lt;i&gt; tag</i></p><p><em>Emphasized Text using &lt;em&gt; tag</em></p><p><u>Underlined Text using &lt;u&gt; tag</u></p><p><mark>Marked or Highlighted Text using &lt;mark&gt; tag</mark></p><p><small>Small Text using &lt;small&gt; tag</small></p><p><big>Big Text using &lt;big&gt; tag</big></p><p>This is <sub>Subscript</sub> text using &lt;sub&gt; tag</p><p>This is <sup>Superscript</sup> text using &lt;sup&gt; tag</p><p><del>Deleted Text using &lt;del&gt; tag</del></p><p><ins>Inserted Text using &lt;ins&gt; tag</ins></p><p><strike>Strike Through Text using &lt;strike&gt; tag</strike></p><p><code>System.out.println("Hello World");</code> using &lt;code&gt; tag</p><p><kbd>Keyboard Input Text using &lt;kbd&gt; tag</kbd></p><p><samp>Sample Output Text using &lt;samp&gt; tag</samp></p><p><var>Variable Text using &lt;var&gt; tag</var></p><pre>This is preformatted text using &lt;pre&gt; tag. It preserves spaces and line breaks.</pre><p><q>Quoted Text using &lt;q&gt; tag</q></p><blockquote>This is a blockquote text using &lt;blockquote&gt; tag. It is displayed as an indented block.</blockquote><hr><p>All HTML text formatting tags are demonstrated in this web page.</p></body></html>`,
+        4: `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Complex Nested Lists</title></head><body style="font-family:Arial;"><h1>This is a WebPage of HTML Nested Lists Tags</h1><hr><h3>Name : Swayam Vivek Patil</h3><h3>Division : A</h3><h3>Class : S. Y. B. Tech CSE</h3><h3>Batch : S5</h3><h3>Roll No. : 125</h3><hr><ol type="1" start="1"><li>Programming Languages<ul type="disc"><li>Python</li><li>Java</li><li>Web Technologies<ol type="A" start="3"><li>HTML</li><li>CSS</li><li>JavaScript Frameworks<ul type="square"><li>React</li><li>Angular</li><li>Vue</li><li>Svelte</li></ul></li></ol></li><li>C / C++</li></ul></li><li>Databases<ul type="circle"><li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li><li>Oracle</li></ul></li><li>Operating Systems</li><ul type="square"><li><b><i>Ubuntu</i></b> - A Free Open Operating System</li><li><b><i>Windows</i></b> - A Licensed Operating System, Developed by <u>Microsoft Inc.</u></li><li><b><i>MacOS</i></b> - A Licensed Operating System, Developed by <u>Apple Inc.</u></li><li><b><i>Android</i></b> - An Operating System for Smartphones, Developed by <u>Google Inc.</u></li></ul></ol></body></html>`,
+        5: `<!DOCTYPE html><html><head><style>body{font-family:sans-serif; text-align:center;} img{width:300px; border-radius:15px; box-shadow:0 10px 20px rgba(0,0,0,0.2);}</style></head><body><h1>Assignment 5</h1><hr><h3>Name: Swayam Patil | Roll: 125</h3><a href="https://www.google.com/"><img src="https://drive.google.com/thumbnail?id=1Ku1u5n2P5KT8uu318uRZXmGbpgDcGAGA" alt="Google"></a></body></html>`,
+        6: `<!DOCTYPE html><html><head><style>body{background: #f0f0f0; text-align:center; padding:20px;} iframe{width:80%; height:300px; border:1px solid #ccc;}</style></head><body><h1>🌐 Creative HTML Iframe</h1><iframe src="https://www.example.com"></iframe><br><button onclick="alert('Iframe Loaded!')">Click Me</button></body></html>`,
+        7: `<!DOCTYPE html><html><head><style>body{text-align:center; font-family:sans-serif;} img{width:200px; transition: 0.3s;} img:hover{transform: scale(1.1);}</style></head><body><h1>Assignment 7: Links</h1><a href="https://www.google.com/">Click here for Google</a><br><br><a href="https://www.google.com/"><img src="https://drive.google.com/thumbnail?id=1Ku1u5n2P5KT8uu318uRZXmGbpgDcGAGA"></a></body></html>`,
+        8: `<html><body><h3>Swayam Patil - 125</h3><h2>Student Information Table</h2><table border="1"><tr><th>Roll no</th><th>Name</th><th>Course</th><th>Marks</th></tr><tr><td>101</td><td>Rahul</td><td>CS</td><td>85</td></tr><tr><td>102</td><td>Priya</td><td>IT</td><td>90</td></tr></table></body></html>`,
+        9: `<html><body><h3>Swayam Patil - 125</h3><h2>Detailed Student Table</h2><table border="1"><tr><th>Roll no</th><th>Name</th><th>Course</th><th>Marks</th></tr><tr><td>101</td><td>Rahul</td><td>CS</td><td>85</td></tr><tr><td>102</td><td>Priya</td><td>IT</td><td>90</td></tr></table></body></html>`,
+        10: `<!DOCTYPE html><html><head><style>body{background:#0a0e27; color:white; font-family:sans-serif; padding:20px;} .card{border:1px solid #00e6ff; padding:15px; margin:10px; border-radius:10px;}</style></head><body><h1>Swayam Patil</h1><div class="card"><h2>About Me</h2><p>B.Tech CSE Student at D Y Patil.</p></div></body></html>`,
+        11: `<!DOCTYPE html><html><head><style>body{background:#0a0e27; color:white; font-family:sans-serif; padding:20px;} .card{border:1px solid #00e6ff; padding:15px; margin:10px; border-radius:10px;}</style></head><body><h1>Swayam Patil Resume</h1><div class="card"><h2>Skills</h2><p>C++, Java, HTML, CSS, Python</p></div></body></html>`,
+        12: `<html><body><h2>My CD Collection</h2><table border="1"><tr bgcolor="#9acd32"><th>Title</th><th>Artist</th></tr><tr><td>Empire Burlesque</td><td>Bob Dylan</td></tr><tr><td>Greatest Hits</td><td>Dolly Parton</td></tr></table></body></html>`,
+        13: `<html><body><h2>My CD Collection (Ass 13)</h2><table border="1"><tr bgcolor="#9acd32"><th>Title</th><th>Artist</th></tr><tr><td>Empire Burlesque</td><td>Bob Dylan</td></tr><tr><td>Greatest Hits</td><td>Dolly Parton</td></tr></table></body></html>`
+    };
+
+    function loadAssignment(num, btn) {
+        // Handle Active State
+        document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Toggle visibility
+        document.getElementById('placeholder-text').style.display = 'none';
+        const frame = document.getElementById('output-frame');
+        frame.style.display = 'block';
+
+        // Inject HTML into iframe
+        const doc = frame.contentWindow.document;
+        doc.open();
+        doc.write(assignmentCodes[num]);
+        doc.close();
+    }
+</script>
+
+</body>
+</html>
