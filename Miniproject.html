@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaySync | Salary & Payroll Tool</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .input-card h3 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            color: #3498db;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .result-card {
+            background: #2c3e50;
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+        }
+
+        .total {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #2ecc71;
+            border-top: 1px solid #455a64;
+            padding-top: 15px;
+            margin-top: 10px;
+        }
+
+        .minus {
+            color: #ff7675;
+        }
+
+        @media (max-width: 650px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>PaySync Salary Tool</h1>
+        
+        <div class="calculator-grid">
+            <div class="input-card">
+                <h3>Earnings & Data</h3>
+                <div class="input-group">
+                    <label>Basic Monthly Salary (₹)</label>
+                    <input type="number" id="basicPay" value="45000">
+                </div>
+                <div class="input-group">
+                    <label>HRA / Allowances (₹)</label>
+                    <input type="number" id="hra" value="15000">
+                </div>
+                <div class="input-group">
+                    <label>Performance Bonus (₹)</label>
+                    <input type="number" id="bonus" value="5000">
+                </div>
+            </div>
+
+            <div class="result-card">
+                <h3>Salary Breakdown</h3>
+                <div class="result-item">
+                    <span>Gross Earnings:</span>
+                    <span id="displayGross">₹0</span>
+                </div>
+                <div class="result-item">
+                    <span>PF (12% of Basic):</span>
+                    <span id="displayPF" class="minus">-₹0</span>
+                </div>
+                <div class="result-item">
+                    <span>Income Tax (10%):</span>
+                    <span id="displayTax" class="minus">-₹0</span>
+                </div>
+                <div class="result-item total">
+                    <span>Net Take-Home:</span>
+                    <span id="displayNet">₹0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const basicInput = document.getElementById('basicPay');
+        const hraInput = document.getElementById('hra');
+        const bonusInput = document.getElementById('bonus');
+
+        const displayGross = document.getElementById('displayGross');
+        const displayPF = document.getElementById('displayPF');
+        const displayTax = document.getElementById('displayTax');
+        const displayNet = document.getElementById('displayNet');
+
+        function updatePayroll() {
+            const basic = parseFloat(basicInput.value) || 0;
+            const hra = parseFloat(hraInput.value) || 0;
+            const bonus = parseFloat(bonusInput.value) || 0;
+
+            const gross = basic + hra + bonus;
+            const pf = basic * 0.12;
+            const tax = gross * 0.10;
+            const net = gross - pf - tax;
+
+            const formatter = new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 0
+            });
+
+            displayGross.innerText = formatter.format(gross);
+            displayPF.innerText = "-" + formatter.format(pf);
+            displayTax.innerText = "-" + formatter.format(tax);
+            displayNet.innerText = formatter.format(net);
+        }
+
+        [basicInput, hraInput, bonusInput].forEach(input => {
+            input.addEventListener('input', updatePayroll);
+        });
+
+        updatePayroll();
+    </script>
+</body>
+</html>
